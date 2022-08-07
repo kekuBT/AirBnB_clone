@@ -4,7 +4,6 @@
 """ Base module """
 import uuid
 from datetime import datetime
-# import the variable storage
 import models
 
 
@@ -45,7 +44,7 @@ class BaseModel:
         # Old-style: self.__class__.__name__
         class_name = type(self).__name__
         mssg = "[{0}] ({1}) {2}".format(class_name, self.id, self.__dict__)
-        return (mssg)
+        return mssg
 
     # Public instance methods
     def save(self):
@@ -68,4 +67,4 @@ class BaseModel:
                 tdic[n] = i.isoformat()
             else:
                 tdic[n] = i
-        return (tdic)
+        return tdic
