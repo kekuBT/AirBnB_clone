@@ -2,9 +2,11 @@
 
 
 """Unittest User"""
+
+
 import unittest
 import os
-from models.state import State
+from models.user import User
 from models.base_model import BaseModel
 
 
@@ -45,7 +47,6 @@ class test_Amenity(unittest.TestCase):
 
     def test_strings(self):
         self.assertEqual(type(self.state1.name), str)
-
 
 if __name__ == "__main__":
     unittest.main()

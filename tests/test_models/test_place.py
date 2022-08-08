@@ -2,9 +2,11 @@
 
 
 """Unittest User"""
+
+
 import unittest
 import os
-from models.place import Place
+from models.user import User
 from models.base_model import BaseModel
 
 
@@ -63,7 +65,6 @@ class test_Amenity(unittest.TestCase):
         self.assertEqual(type(self.place1.street_id), str)
         self.assertEqual(type(self.place1.descrip_id), str)
         self.assertEqual(type(self.place1.amenity_id), str)
-
 
 if __name__ == "__main__":
     unittest.main()

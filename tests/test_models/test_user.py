@@ -2,11 +2,12 @@
 
 
 """Unittest User"""
+
+
 import unittest
 import os
 from models.user import User
 from models.base_model import BaseModel
-
 
 class test_user(unittest.TestCase):
 
@@ -53,7 +54,6 @@ class test_user(unittest.TestCase):
         self.assertNotEqual(type(self.my_user.updated_at), str)
         self.assertNotEqual(type(self.my_user.email), str)
         self.assertNotEqual(type(self.my_user.password), str)
-
 
 if __name__ == "__main__":
     unittest.main()
