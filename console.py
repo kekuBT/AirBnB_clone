@@ -104,8 +104,7 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
 
     def do_update(self, line):
-        """ Updates an instance Usage: update <class name> <id> 
-        <attribute name> "<attribute value>"""
+        """ Updates an instance based on class"""
         n = line.split()
         if len(n) == 0:
             print("** class name missing **")
