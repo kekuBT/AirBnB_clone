@@ -6,7 +6,7 @@
 
 import unittest
 import os
-from models.user import User
+from models.city import City
 from models.base_model import BaseModel
 
 
@@ -50,6 +50,7 @@ class test_Amenity(unittest.TestCase):
     def test_strings(self):
         self.assertEqual(type(self.city1.name), str)
         self.assertEqual(type(self.city1.state_id), str)
+
 
 if __name__ == "__main__":
     unittest.main()
