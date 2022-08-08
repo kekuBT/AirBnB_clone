@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 """ review of user's when left the place """

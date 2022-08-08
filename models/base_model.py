@@ -1,72 +1,70 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+
+""" Base module """
 import uuid
 from datetime import datetime
+# import the variable storage
 import models
 
 
 class BaseModel:
-    """Base Model Class
-    This is the Base Model that take care of the
-    initialization, serialization and deserialization
-    of the future instances.
-    Attributes:
-        id (str): It's an UUID for when an instance is created.
-        created_at (datetime): The current date and time that
-            an instance is created.
-        updated_at (datetime): The current date and time that
-            an instance is created and it will be updated every
-            time that the object changes.
-    """
+    """ class for all other classes to inherit from """
 
     def __init__(self, *args, **kwargs):
-        """Base Model __init__ Method
-        Here, the default values of a Base Model
-        instance are initialized.
-        """
-        if kwargs:
-            for arg, val in kwargs.items():
-                if arg in ('created_at', 'updated_at'):
-                    val = datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f')
+        """ Constructor and re-create an instance with
+        this dictionary representation"""
+        if len(kwargs) > 0:
+            # each key of this dictionary is an attribute name
+            # each value of this dictionary is the value of this attribute name
+            for key, value in kwargs.items():
+                if key == "updated_at":
+                    # Convert string date to datetime object
+                    # strptime (string parse time): Parse a string into a -
+                    # datetime object given a corresponding format
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "created_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "__class__":
+                    # This happens because __class__ is not mandatory in output
+                    continue
 
-                if arg != '__class__':
-                    setattr(self, arg, val)
+                setattr(self, key, value)
         else:
+            # Generate a random UUID
             self.id = str(uuid.uuid4())
+            # assign with the current datetime when an instance is created
             self.created_at = datetime.now()
-            self.updated_at = self.created_at
+            self.updated_at = datetime.now()
+            # if it’s a new instance add a call to the method new(self) on stge
             models.storage.new(self)
 
     def __str__(self):
-        """Representation of the class for the user
-        Example:
-            $ bm = BaseModel()
-            $ print(bm)
-            This method prints the content of the Base Model
-            class with this format
-            $ [<class name>] (<self.id>) <self.__dict__>
-        """
-        return '[{0}] ({1}) {2}'.format(
-            self.__class__.__name__, self.id, self.__dict__
-        )
+        """ overriding the __str__ method that returns a custom
+        string object """
+        # Old-style: self.__class__.__name__
+        class_name = type(self).__name__
+        mssg = "[{0}] ({1}) {2}".format(class_name, self.id, self.__dict__)
+        return (mssg)
 
+    # Public instance methods
     def save(self):
-        """Updates a Base Model instance
-        Updates the public instance attribute `updated_at`
-        with the current datetime and dumps the class data
-        into a file
-        """
+        """ updates the public instance attribute updated_at with
+        the current datetime """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """Converts the information of the class to human-readable format
-        Returns a new dictionary containing all keys/values
-        of __dict__ of the instance.
-        """
-        class_info = self.__dict__.copy()
-        class_info['__class__'] = self.__class__.__name__
-        class_info['created_at'] = self.created_at.isoformat()
-        class_info['updated_at'] = self.updated_at.isoformat()
-
-        return class_info
+        """returns a dictionary containing all keys/values
+        of __dict__ of the instance."""
+        # Define a dictionary and key __class__ that add to this dictionary
+        # with the class name of the object
+        tdic = {}
+        tdic["__class__"] = type(self).__name__
+        # loop over dict items and validate created_at and updated_at to
+        # convert in ISO format
+        for n, i in self.__dict__.items():
+            if isinstance(i, datetime):
+                tdic[n] = i.isoformat()
+            else:
+                tdic[n] = i
+        return (tdic)
