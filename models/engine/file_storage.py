@@ -17,8 +17,8 @@ class FileStorage:
     JSON file to instances """
     __file_path = "file.json"
     __objects = {}
-    lavel_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-                  "City": City, "Place": Place, "State": State, "Review": Review}
+    lvldict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+               "City": City, "Place": Place, "State": State, "Review": Review}
 
     def all(self):
         """" returns the dictionary __objects """
