@@ -1,0 +1,35 @@
+.popover {
+    display: none;
+    list-style-type: none;
+    background-color: #fafafa;
+    width: auto;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    position: relative;
+    margin-left: -1px;
+    margin-right: -1px;
+    margin-top: 15px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    line-height: 1.5;
+
+}
+
+.popover ul {
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+.popover h2 {
+    margin-bottom: 5px;
+    line-height: 1;
+    margin-left: -5px;
+    font-size: 16px;
+}
+
+.locations:hover .popover,
+.amenities:hover .popover {
+    display: block;
+
+}
