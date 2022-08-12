@@ -41,17 +41,18 @@ class FileStorage:
                 json.dump(ser_dict, f)
 
     def reload(self):
-        """ deserializes the JSON file to __objects (only if the JSON file
-        (__file_path) exists, otherwise, do nothing. If the file doesn’t
-        exist, no exception should be raised) """
-        # Validate if file exists
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as f:
-                des_json = json.load(f)
-                for key, value in des_json.items():
-                    # Separate name_class from id and split the separator
-                    k = key.split('.')
-                    # search "__class__": "BaseModel"
-                    class_name = k[0]
-                    # set in __objects the key, value
-                    self.new(eval("{}".format(class_name))(**value))
+        """Loads storage dictionary from file"""
+
+        classes = {
+            'BaseModel': BaseModel, 'User': User, 'Place': Place,
+            'State': State, 'City': City, 'Amenity': Amenity,
+            'Review': Review
+        }
+        try:
+            temp = {}
+            with open(FileStorage.__file_path, 'r') as f:
+                temp = json.load(f)
+                for key, val in temp.items():
+                    self.all()[key] = classes[val['__class__']](**val)
+        except FileNotFoundError:
+            pass

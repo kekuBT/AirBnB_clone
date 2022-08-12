@@ -4,6 +4,7 @@
 import uuid
 from datetime import datetime
 # import the variable storage
+import tests
 import models
 
 
