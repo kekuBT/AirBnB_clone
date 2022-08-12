@@ -40,7 +40,7 @@ class FileStorage:
                 ser_dict[key] = value.to_dict()
                 json.dump(ser_dict, f)
 
-    def reload(self):
+    def reload(self, *args):
         """ deserializes the JSON file to __objects (only if the JSON file
         (__file_path) exists, otherwise, do nothing. If the file does not
         exist, no exception should be raised) """
