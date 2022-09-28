@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Program that contains the entry point of the command interpreter """
+"""Defines the HBnB console."""
 import cmd
 import re
 from shlex import split
@@ -14,7 +14,7 @@ from models.review import Review
 
 
 def parse(arg):
-    """ Retrieve instances based on methods, i.e. <class name>.all() """
+    """ Retrieve instances based on methods """"
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
@@ -208,3 +208,4 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
+
