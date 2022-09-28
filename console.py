@@ -14,7 +14,7 @@ from models.review import Review
 
 
 def parse(arg):
-    """ Retrieve instances based on methods """"
+    """ Retrieve instances based on methods, i.e. <class name>.all() """
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
